@@ -1,0 +1,206 @@
+body {
+	background-image: -webkit-gradient(
+	    linear,
+	    left top,
+	    left bottom,
+	    color-stop(0.07, rgb(255,255,255)),
+	    color-stop(0.54, rgb(254,218,177)),
+	    color-stop(0.77, rgb(254,195,127))
+	);
+	background-image: -moz-linear-gradient(
+	    center top,
+	    rgb(255,255,255) 7%,
+	    rgb(254,218,177) 54%,
+	    rgb(254,195,127) 77%
+	);
+}
+
+	/*	GLOBAL MENUBAR	*/
+#webpage #global-menubar {
+	background: transparent url(../images/menubar-line.png) no-repeat 0 100%;
+	margin-bottom: 4px;
+	padding: 2px 0px 0;
+	text-align: left;
+}
+
+#global-menubar li {
+	background: #805010;
+	border: solid 1px transparent;
+	font-weight: bold;
+	margin: 0 3px;
+	padding: 0 5px;
+	-moz-border-radius-topleft: 12px;
+	-moz-border-radius-topright: 12px;
+	-webkit-border-top-left-radius: 12px;
+	-webkit-border-top-right-radius: 12px;
+}
+#global-menubar li.selected {
+	background-image: none;
+	border-color: #aeaeae #aeaeae #ffffff;
+}
+
+#global-menubar li:hover {
+}
+
+#global-menubar li a {
+	color: #ffffff;
+	display: block;
+	font-size: 1.25em;
+	text-decoration: none;
+	text-transform: uppercase;
+	padding: 13px;
+}
+
+#global-menubar li.selected a {
+	color: #0094d4;
+}
+
+#global-menubar li a:visited {
+}
+
+#global-menubar li.nostyle {
+	background-image: none;
+	padding: 0;
+}
+
+#global-menubar li.nostyle a {
+	padding: 0;
+}
+
+#webpage #global-menubar ul.menu li a {
+    padding: 6px 30px 2px;
+    font-size: 19px;
+}
+
+#webpage #global-menubar ul.menu li.lastli a {
+	padding: 6px 30px 2px;
+}
+
+#global-menubar li.lastli {
+	margin-right: 0px;
+    padding-right: 13px;
+}
+
+#global-menubar li.firstli {
+	margin-left: 0px;
+}
+
+#webpage #search {
+	top: 47px;
+}
+
+.class-frontpage #sidebar {
+	background-image: -webkit-gradient(
+	    linear,
+	    left top,
+	    left bottom,
+	    color-stop(0.27, rgb(128,79,16)),
+	    color-stop(0.63, rgb(207,188,164)),
+	    color-stop(0.82, rgb(255,255,255))
+	);
+	background-image: -moz-linear-gradient(
+	    center top,
+	    rgb(128,79,16) 27%,
+	    rgb(207,188,164) 63%,
+	    rgb(255,255,255) 82%
+	);
+}
+
+table.onlinebanking {
+	background: #05482F;
+	text-align: left;
+}
+
+table.onlinebanking img {
+	width: 100%;
+}
+
+table.onlinebanking #loginbutton {
+	margin: 10px 0px;
+}
+
+#sidebar {
+	text-align: center;
+}
+
+.class-frontpage #sidebar iframe {
+	margin-bottom: 15px;
+}
+
+.homepage #extrainfo {
+	margin-top: 270px;
+}
+
+.module{
+	-moz-border-radius:6px;
+	-moz-box-shadow: 3px 3px 6px #666666;
+	-webkit-border-radius:6px;
+	-webkit-box-shadow: 3px 3px 6px #666666;
+	behavior: url(/extension/site/design/site/stylesheets/pie.htc);
+}
+
+#extrainfo .module{
+	background:-moz-linear-gradient(315deg, #ffffff 0%, #ffffff 50%, #FEC88C 100%);
+	background:-webkit-gradient(linear, 0 0, 100% 100%, from(#ffffff), to(#FEC88C), color-stop(0.50,#ffffff));
+	-pie-background:linear-gradient(315deg, #ffffff 0%, #ffffff 50%, #FEC88C 100%);
+	behavior: url(/extension/site/design/site/stylesheets/pie.htc);
+}
+
+.infobox header {
+	background-image: url(/extension/site/design/site/images/infotree.png);
+	background-repeat: no-repeat;
+	min-height: 54px;
+    padding-left: 70px;
+    background-color: #D1BB7E;
+}
+
+.infobox {
+	padding: 0px;
+}
+
+.infobox header h1 {
+	font-size: 18px;
+	color: #FFF;
+	padding-top: 12px;
+}
+
+header[role="banner"] {
+    height: 125px;
+}
+
+.content-view-full header h1 {
+	color: #000;
+}
+
+#webpage .customtag header {
+	border-bottom: none;
+}
+
+.content-view-line h2 a {
+	color: #000;
+}
+
+#webpage .view-item-list {
+	padding-left: 0px;
+}
+
+#multi-banners {
+	margin-bottom: 10px;
+}
+
+.content-view-full header h1 {
+    color: #000000;
+}
+all.css (line 171)
+.content-view-full header h1 {
+    margin-top: 0;
+}
+html5.css (line 49)
+.infobox header h1, .customtag header h1 {
+    position: absolute;
+    top: 6px;
+}
+
+.infobox header h1, .customtag header h1, .infobox header h2, .customtag header h2, .infobox header h3, .customtag header h3 {
+	font-size: 22px;
+}

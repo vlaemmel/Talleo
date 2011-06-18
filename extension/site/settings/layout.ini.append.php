@@ -1,0 +1,7 @@
+<?
+
+[FullWidthSettings]
+InfoboxesOnHomepage=enabled
+
+
+?>

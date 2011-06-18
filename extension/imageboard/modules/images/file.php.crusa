@@ -1,0 +1,104 @@
+<?php
+
+require_once( 'kernel/classes/ezcontentobjecttreenode.php' );
+$ObjectNode = ezContentObjectTreeNode::fetch($NodeID);
+$dataMap = $ObjectNode->dataMap();
+$AttributeIdentifier = isset($AttributeID)?($AttributeID):'image';
+$ImageData = $dataMap[$AttributeIdentifier]->content()->attribute($ImageAlias);
+
+// 'var/fccu/storage/images/2_25_cd_promotion/153575-4-eng-US/2_25_cd_promotion_supergraphic_RWZmZWN0SURfMQ==.png'
+
+
+$INI = eZINI::instance();
+$User = eZUser::currentUser();
+$cacheFileArray = eZNodeviewfunctions::generateViewCacheFile($User, $NodeID, $ObjectNode->attribute('parent_node_id'), false, 'eng-US', $ViewMode);
+
+if(!file_exists($cacheFileArray['cache_dir'])) {
+	$perm = octdec($INI->variable('FileSettings', 'StorageDirPermissions'));
+	eZDir::mkdir($cacheFileArray['cache_dir'], $perm, true);
+}
+
+//$ImageData['dirpath']
+//$ImageFileURL = $cacheFileArray['cache_dir'].'/'.$ImageData['basename'].'_'.$ImageAlias.'_'.base64_encode('EffectID_'.$EffectID).'.png';
+$ImageFileURL = $cacheFileArray['cache_path'];
+$stillneedimage = true;
+
+if(file_exists($ImageFileURL)) {
+	$last_write = @filemtime( $ImageFileURL );
+	if (eZExpiryHandler::getTimestamp('content-view-cache',-1) < $last_write && (time() - $last_write) < 60*60 ) {
+		$Image = new Imagick();
+		$Image->readImage($ImageFileURL);
+		$stillneedimage = false;
+	}
+}
+
+if ($stillneedimage) {
+	
+	if(isset($EffectID)) {
+		$BaseImage = new Imagick($ImageData['url']);
+		
+		eZDebug::writeDebug('test');
+		
+		if($EffectID==1) {
+			$PatternImage = new Imagick('extension/site/design/site/images/composite.png');
+			$CropRatio = (int)(($ImageData['width']*0.082)/2);
+			$Image=$BaseImage;
+			$PatternImage->cropImage($ImageData['width'],$ImageData['height'],0,0);
+			$ImageClone = $Image->clone();
+			$ImageClone->cropImage($ImageData['width']-$CropRatio,$ImageData['height']-$CropRatio,$CropRatio/2,$CropRatio/2);
+			$Image->setImageDepth(8);
+			$Image->setImageResolution(72,72);
+			$Image->setImageCompression(Imagick::COMPRESSION_JPEG2000);
+			$Image->compositeImage($PatternImage, Imagick::COMPOSITE_OVER, 0, 0);
+			$Image->compositeImage($ImageClone, Imagick::COMPOSITE_OVER, $CropRatio/2, $CropRatio/2);
+			$Image->writeImage($ImageFileURL);
+	   } else if($EffectID==2) {
+			$PatternImage = new Imagick('extension/site/design/site/images/composite.png');
+			$CropRatio = (int)(($ImageData['width']*0.125)/2);
+			$Image=$BaseImage;
+			$PatternImage->cropImage($ImageData['width'],$ImageData['height'],0,0);
+			$ImageClone = $Image->clone();
+			$ImageClone->cropImage($ImageData['width']-$CropRatio,$ImageData['height']-$CropRatio,$CropRatio/2,$CropRatio/2);
+			$Image->setImageDepth(8);
+			$Image->setImageResolution(72,72);
+			$Image->setImageCompression(Imagick::COMPRESSION_JPEG2000);
+			$Image->compositeImage($PatternImage, Imagick::COMPOSITE_OVER, 0, 0);
+			$Image->compositeImage($ImageClone, Imagick::COMPOSITE_OVER, $CropRatio/2, $CropRatio/2);
+			$Image->writeImage($ImageFileURL);
+
+	   }
+	} else {
+		$Image = new Imagick();
+		$Image->readImage($ImageData['url']);
+	}
+}
+
+//$Image->setImageFormat($ImageData['suffix']);
+//header('Content-Type: '.$ImageData['mime_type']);
+$Image->setImageFormat("jpg");
+header("Content-Type: image/jpg");
+echo $Image;
+eZExecution::cleanExit();
+
+
+/*
+$ImageProps = array(
+	'Image File URL'=>$ImageFileURL,
+	'Base Image Path'=>$ImageData['url'],
+	'Base Image Size'=>$BaseImage->getImageSize(),
+	'Image Size'=>$Image->getImageSize(),
+	'Image Type'=>$Image->getImageType(),
+	'Image Resolution'=>$Image->getImageResolution(),
+	'Image Depth'=>$Image->getImageDepth(),
+	'Image Channel Depth'=>$Image->getImageChannelDepth(Imagick::CHANNEL_ALL),
+	'Image Compression'=>$Image->getCompression(),
+	'Image Compression Quality'=>$Image->getCompressionQuality(),
+	'Base Image Data'=>$ImageData
+);
+
+$Result = array();
+$Result['content'] = '<pre style="text-align: left;">'.var_export($ImageProps,true).'</pre>';
+	return $Result;
+*/
+
+?>

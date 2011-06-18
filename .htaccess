@@ -1,0 +1,43 @@
+php_value allow_call_time_pass_reference 0
+
+<FilesMatch "\.">
+   order allow,deny
+   deny from all
+</FilesMatch>
+
+<FilesMatch "(pdf|ico|gif|jpe?g|png|jar|htc|css|js|txt|php|html|var(.+)storage.pdf(.+)\.pdf)$">
+   order allow,deny
+   allow from all
+</FilesMatch>
+
+<FilesMatch "index\.php|index_treemenu\.php">
+   Options +Includes
+   SetOutputFilter INCLUDES
+   AcceptPathInfo On
+   order allow,deny
+   allow from all
+</FilesMatch> 
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{REQUEST_URI} !site_admin
+RewriteRule ^index.php/(sunny/)?(.*)? /$2 [L,R=301]
+
+RewriteRule ^phpicalendar/ezdisplayicals.* index.php [L]
+RewriteRule ^phpicalendar/ezpublishicals.* index.php [L]
+
+RewriteRule \.php(.*)? - [L]
+RewriteRule ^/var/[^/]+/cache/(stylesheets|images|javascripts?)/.* - [L]
+RewriteRule content/treemenu/(.*)? index_treemenu.php?node_id=$1 [L]
+RewriteRule index_treemenu.php - [L]
+RewriteRule robots.txt - [L]
+RewriteRule design/.* - [L]
+RewriteRule wordpress/.* - [L]
+RewriteRule ^robots.txt - [L]
+
+RewriteRule !\.(pdf|ico|gif|jpe?g|png|jar|css|htc|js|html)|var(.+)storage.pdf(.+)\.pdf$ index.php
+
+DirectoryIndex index.php
+
+
