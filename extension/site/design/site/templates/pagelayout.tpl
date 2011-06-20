@@ -23,7 +23,7 @@
 	<div id="webpage">
 		{include uri="design:page_header.tpl" logo_alt=$site.title|wash() logo_width=252 logo_height=72}
 		<nav id="global-menubar">
-			{include uri='design:menu/menubar.tpl' orientation='horizontal' rootNodeId=$indexpage menuDepth=3 attribute_filter=array('and', array('priority','>',0), array('priority','<',10)) additional_items=array()}
+			{include uri='design:menu/menubar.tpl' orientation='tabbbed' rootNodeId=$indexpage menuDepth=3 attribute_filter=array('and', array('priority','>',0), array('priority','<',10)) additional_items=array()}
 		</nav>
 		<section id="site-columns">
 			{if $pagedata.website_toolbar}

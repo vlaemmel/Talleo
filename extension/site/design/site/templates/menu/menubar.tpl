@@ -43,7 +43,7 @@
 						     'sort_by', $menuItem.sort_array,
 						     'class_filter_type', $classFilterType,
 						     'class_filter_array', $classFilterArray))}
-	<ul class="submenu vertical">
+	<ul class="submenu horizontal">
    {foreach $menuItemChildren as $key => $submenuItem}
       {set $itemClass = cond($currentNodeInPath|eq($submenuItem.node_id), array("selected"), array())
 	    $menuLink = cond( eq($ui_context, 'browse'), concat("content/browse/", $submenuItem.node_id)|ezroot(no), first_set($submenuItem.data_map.location.content, $submenuItem.url_alias|ezroot(no)) )}
